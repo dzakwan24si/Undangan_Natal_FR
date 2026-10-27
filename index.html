@@ -517,40 +517,88 @@
   .c-berkat { --c: var(--gold); }
   .lead em { color: var(--c); }
 
-  /* Ayat Alkitab Card */
+  /* Ayat Alkitab Card (Sacred Editorial Frame) */
   .verse-card {
     position: relative;
     margin: 32px 0 0;
-    padding: 24px 26px 22px 30px;
+    padding: 32px 28px 28px;
     border-radius: 20px;
-    background: linear-gradient(165deg, rgba(6, 44, 50, 0.7) 0%, rgba(2, 22, 26, 0.85) 100%);
-    border: 1px solid var(--glass-border);
-    border-left: 5px solid var(--gold);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 14px 34px -10px rgba(0,0,0,.5);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(242, 193, 78, 0.12) 0%, transparent 70%),
+      linear-gradient(165deg, rgba(6, 44, 50, 0.72) 0%, rgba(2, 22, 26, 0.88) 100%);
+    border: 1px solid rgba(242, 193, 78, 0.32);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 16px 38px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    text-align: center;
+    overflow: hidden;
   }
-  .verse-quote-icon {
-    font-family: var(--f-serif);
-    font-size: 3.2rem;
-    color: var(--gold);
-    opacity: .35;
-    line-height: 0;
+  .verse-card::before {
+    content: "";
     position: absolute;
-    top: 24px;
-    left: 12px;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.9;
   }
-  .verse-card p { margin: 0; font-size: 1.08rem; color: var(--snow); line-height: 1.6; font-style: italic; }
-  .verse-card cite { display: block; margin-top: 14px; font-style: normal; font-weight: 800; font-size: .82rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
-
-  /* Stages Timeline */
-  .stages { list-style: none; margin: 38px 0 0; padding: 0; }
-  .stages li { position: relative; padding: 0 0 30px 40px; }
-  .stages li:last-child { padding-bottom: 0; }
-  .stages li::before { content: ""; position: absolute; left: 7px; top: 22px; bottom: -6px; width: 2px; background: linear-gradient(var(--c), var(--c2, var(--c))); }
-  .stages li:last-child::before { display: none; }
-  .stages li::after { content: ""; position: absolute; left: 0; top: 10px; width: 16px; height: 16px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 4px var(--ink), 0 0 16px var(--c); }
-  .stages b { display: block; font-family: var(--f-display); font-weight: 800; font-size: 1.8rem; line-height: 1.15; letter-spacing: -.02em; color: var(--c); }
-  .stages span { color: var(--mist); font-size: .95rem; }
+  .verse-icon-wrap {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: rgba(242, 193, 78, 0.12);
+    border: 1px solid rgba(242, 193, 78, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    box-shadow: 0 0 16px rgba(242, 193, 78, 0.25);
+  }
+  .verse-card p,
+  .verse-text {
+    margin: 0 auto;
+    font-family: var(--f-serif);
+    font-size: 1.15rem;
+    color: var(--snow);
+    line-height: 1.7;
+    font-style: italic;
+    max-width: 44ch;
+  }
+  .verse-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 18px auto 14px;
+    max-width: 180px;
+    color: var(--gold);
+    opacity: 0.75;
+  }
+  .verse-divider span {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(242, 193, 78, 0.4), transparent);
+  }
+  .verse-divider i {
+    font-style: normal;
+    font-size: 0.65rem;
+    color: var(--gold-soft);
+  }
+  .verse-card cite,
+  .verse-ref {
+    display: block;
+    margin: 0;
+    font-family: var(--f-body);
+    font-style: normal;
+    font-weight: 800;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    text-shadow: 0 0 12px rgba(242, 193, 78, 0.3);
+  }
 
   /* Detail Acara Rows */
   .rows { margin: 0; display: grid; gap: 12px; }
@@ -614,62 +662,190 @@
   .foot p { margin: 0; color: var(--mist); font-size: .92rem; max-width: 54ch; }
   .foot b { display: block; color: var(--snow); font-size: 1rem; margin-bottom: 2px; }
 
-  /* ---------- FLOATING MUSIC BUTTON ---------- */
-  .music-toggle {
+  /* ---------- FLOATING MUSIC BUTTON (PIRINGAN HITAM / VINYL TURNTABLE) ---------- */
+  .music-player-wrap {
     position: fixed;
     right: 20px;
     bottom: 24px;
     z-index: 950;
-    width: 52px;
-    height: 52px;
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Sound wave pulse when playing */
+  .music-soundwave {
+    position: absolute;
+    inset: -6px;
     border-radius: 50%;
-    background: rgba(4, 38, 43, 0.88);
-    border: 1.5px solid var(--gold);
-    color: var(--gold-soft);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 10px 26px -6px rgba(0, 0, 0, 0.7), 0 0 18px -2px var(--gold-glow);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: transform .25s ease, background .2s ease, border-color .2s ease;
+    border: 1.5px solid rgba(242, 193, 78, 0.45);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .music-player-wrap.is-playing .music-soundwave {
+    animation: vinylPulse 2.2s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+  }
+  @keyframes vinylPulse {
+    0% { transform: scale(0.92); opacity: 0.8; }
+    100% { transform: scale(1.38); opacity: 0; }
+  }
+
+  /* Tonearm (Jarum Pemutar Piringan Hitam) */
+  .music-tonearm {
+    position: absolute;
+    top: -9px;
+    right: 3px;
+    width: 24px;
+    height: 32px;
+    z-index: 10;
+    pointer-events: none;
+    transform-origin: 20px 4px;
+    transform: rotate(-32deg);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.65));
+  }
+  .music-player-wrap.is-playing .music-tonearm {
+    transform: rotate(0deg);
+  }
+
+  /* Vinyl Disc Button */
+  .music-toggle {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #0d0d0d;
+    border: none;
     padding: 0;
-  }
-  .music-toggle:hover {
-    transform: scale(1.08);
-    background: rgba(7, 67, 74, 0.95);
-    border-color: var(--gold-soft);
-  }
-  .music-disc {
-    width: 26px;
-    height: 26px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.75), 0 0 0 1.5px rgba(242, 193, 78, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gold);
+    outline: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .music-disc svg { width: 100%; height: 100%; }
-  .music-toggle.is-playing .music-disc {
-    animation: discSpin 4s linear infinite;
+  .music-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.85), 0 0 16px rgba(242, 193, 78, 0.6);
   }
-  @keyframes discSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* Vinyl Disc Surface (Realistic Piringan Hitam) */
+  .vinyl-disc {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      repeating-radial-gradient(circle at center, rgba(255, 255, 255, 0.04) 0px, rgba(255, 255, 255, 0.04) 1px, transparent 2px, transparent 4px),
+      radial-gradient(circle at center, #111111 0%, #202020 30%, #0d0d0d 60%, #1a1a1a 85%, #050505 100%);
+    box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.12), inset 0 0 8px rgba(0, 0, 0, 0.9);
+    animation: vinylSpin 3.5s linear infinite;
+    animation-play-state: paused;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .music-player-wrap.is-playing .vinyl-disc {
+    animation-play-state: running;
+  }
+
+  /* Conic Glare / Shininess that rotates with the vinyl */
+  .vinyl-disc::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 30deg,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.14) 35deg,
+      transparent 70deg,
+      transparent 180deg,
+      rgba(255, 255, 255, 0.14) 215deg,
+      transparent 250deg
+    );
+    pointer-events: none;
+  }
+
+  /* Center Label (Stiker Tengah Piringan) */
+  .vinyl-label {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #b91c1c 0%, #7f1d1d 80%);
+    border: 1.5px solid var(--gold);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-soft);
+    z-index: 2;
+  }
+  .vinyl-label svg {
+    width: 12px;
+    height: 12px;
+    fill: var(--gold-soft);
+  }
+
+  /* Spindle Hole in Center */
+  .vinyl-label::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 0.8px solid var(--gold);
+  }
+
+  /* Status Badge (Indikator Play / Pause di sudut) */
   .music-badge {
     position: absolute;
     bottom: -2px;
     right: -2px;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     background: var(--red);
+    border: 2px solid var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,.5);
-    border: 1.5px solid var(--ink);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+    z-index: 5;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   }
-  .music-badge svg { width: 10px; height: 10px; }
+  .music-player-wrap.is-playing .music-badge {
+    background: var(--teal);
+    border-color: var(--gold);
+  }
+
+  /* Icons Display Logic strictly in CSS */
+  .music-badge .icon-play {
+    display: block !important;
+    width: 10px;
+    height: 10px;
+    margin-left: 1.5px;
+    fill: currentColor;
+  }
+  .music-badge .icon-pause {
+    display: none !important;
+    width: 9px;
+    height: 9px;
+    fill: currentColor;
+  }
+  .music-player-wrap.is-playing .music-badge .icon-play {
+    display: none !important;
+  }
+  .music-player-wrap.is-playing .music-badge .icon-pause {
+    display: block !important;
+  }
+
+  @keyframes vinylSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
   
   /* ---------- WISHES WALL (DOA & UCAPAN) ---------- */
@@ -958,16 +1134,29 @@
   </div>
 </div>
 
-<!-- Floating Music Button & Audio -->
-<button type="button" class="music-toggle" id="music-toggle" aria-label="Putar atau jeda musik latar" title="Musik Latar">
-  <div class="music-disc">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
-  </div>
-  <div class="music-badge">
-    <svg class="icon-play" id="icon-play" viewBox="0 0 24 24" fill="currentColor" hidden aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-    <svg class="icon-pause" id="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-  </div>
-</button>
+<!-- Floating Music Button & Audio (Piringan Hitam / Vinyl Turntable) -->
+<div class="music-player-wrap" id="music-player-wrap">
+  <div class="music-soundwave"></div>
+
+  <!-- Tonearm (Jarum Pemutar) -->
+  <svg class="music-tonearm" viewBox="0 0 24 32" fill="none" aria-hidden="true">
+    <circle cx="20" cy="4" r="3.5" fill="#f2c14e" stroke="#ffe3a1" stroke-width="0.8"/>
+    <path d="M20 4 L14 16 L12 26" stroke="#e6cfa3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="9.5" y="24" width="5" height="7" rx="1.5" fill="#f2c14e" transform="rotate(15 12 27)"/>
+  </svg>
+
+  <button type="button" class="music-toggle" id="music-toggle" aria-label="Putar musik latar" title="Putar Musik">
+    <div class="vinyl-disc">
+      <div class="vinyl-label">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+    </div>
+    <div class="music-badge">
+      <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </div>
+  </button>
+</div>
 <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
 <!-- Background Scene with Lights and Parallax -->
@@ -1046,16 +1235,17 @@
       <p class="lead">Merayakan kasih karunia Tuhan melalui setiap <em class="c-benih">benih</em> yang kita tanam, <em class="c-akar">akar</em> yang kita kuatkan, dan <em class="c-berkat">berkat</em> yang kita tuai bersama</p>
       
       <div class="verse-card">
-        <span class="verse-quote-icon">“</span>
-        <p>Karena itu yang penting bukanlah yang menanam atau yang menyiram, melainkan Allah yang memberi pertumbuhan.</p>
-        <cite>1 Korintus 3:7 (TB)</cite>
+        <div class="verse-icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2l2.4 6.9 7.1.3-5.5 4.5 1.9 6.9-5.9-4-5.9 4 1.9-6.9-5.5-4.5 7.1-.3z"/></svg>
+        </div>
+        <p class="verse-text">“Karena itu yang penting bukanlah yang menanam atau yang menyiram, melainkan Allah yang memberi pertumbuhan.”</p>
+        <div class="verse-divider" aria-hidden="true">
+          <span></span>
+          <i>✦</i>
+          <span></span>
+        </div>
+        <cite class="verse-ref">1 Korintus 3:7 (TB)</cite>
       </div>
-
-      <ol class="stages">
-        <li class="c-benih"><b>Benih</b><span>yang kita tanam dengan tekad dan pengharapan</span></li>
-        <li class="c-akar"><b>Akar</b><span>yang kita kuatkan di dalam persaudaraan dan iman</span></li>
-        <li class="c-berkat"><b>Berkat</b><span>yang kita tuai bersama bagi kemuliaan-Nya</span></li>
-      </ol>
     </div>
   </section>
 
@@ -1076,17 +1266,6 @@
         <div class="row-card">
           <dt>Tempat</dt>
           <dd>Hotel Pangeran Pekanbaru<small>Grand Ballroom, Jl. Jend. Sudirman No. 371, Pekanbaru</small></dd>
-        </div>
-        <div class="row-card">
-          <dt>Busana</dt>
-          <dd>
-            Rapi dan Sopan
-            <div class="swatch-group">
-              <span class="swatch green">Hijau Zamrud</span>
-              <span class="swatch white">Putih Bersih</span>
-              <span class="swatch gold">Emas Anggun</span>
-            </div>
-          </dd>
         </div>
       </dl>
       <div class="actions">
@@ -1217,9 +1396,7 @@
   var btnOpen = document.getElementById('btn-open');
   var music = document.getElementById('bg-music');
   var musicToggle = document.getElementById('music-toggle');
-  var iconPlay = document.getElementById('icon-play');
-  var iconPause = document.getElementById('icon-pause');
-  var isPlaying = false;
+  var musicWrap = document.getElementById('music-player-wrap');
 
   if (guestName) {
     if (coverGuest) coverGuest.textContent = guestName;
@@ -1231,29 +1408,43 @@
     if (coverGuest) coverGuest.textContent = 'Bapak / Ibu / Saudara/i';
   }
 
+  function syncMusicUI(playing) {
+    if (musicWrap) {
+      if (playing) {
+        musicWrap.classList.add('is-playing');
+      } else {
+        musicWrap.classList.remove('is-playing');
+      }
+    }
+    if (musicToggle) {
+      musicToggle.setAttribute('aria-label', playing ? 'Jeda musik latar' : 'Putar musik latar');
+      musicToggle.setAttribute('title', playing ? 'Jeda Musik' : 'Putar Musik');
+    }
+  }
+
   function playMusic() {
     if (!music) return;
-    music.play().then(function () {
-      isPlaying = true;
-      if (musicToggle) musicToggle.classList.add('is-playing');
-      if (iconPlay) iconPlay.hidden = true;
-      if (iconPause) iconPause.hidden = false;
-    }).catch(function (e) {
-      console.warn('Audio play prevented or file not ready:', e);
-      isPlaying = false;
-      if (musicToggle) musicToggle.classList.remove('is-playing');
-      if (iconPlay) iconPlay.hidden = false;
-      if (iconPause) iconPause.hidden = true;
-    });
+    var playPromise = music.play();
+    if (playPromise !== undefined) {
+      playPromise.then(function () {
+        syncMusicUI(true);
+      }).catch(function (e) {
+        console.warn('Audio play prevented or file not ready:', e);
+        syncMusicUI(false);
+      });
+    }
   }
 
   function pauseMusic() {
     if (!music) return;
     music.pause();
-    isPlaying = false;
-    if (musicToggle) musicToggle.classList.remove('is-playing');
-    if (iconPlay) iconPlay.hidden = false;
-    if (iconPause) iconPause.hidden = true;
+    syncMusicUI(false);
+  }
+
+  if (music) {
+    music.addEventListener('play', function () { syncMusicUI(true); });
+    music.addEventListener('pause', function () { syncMusicUI(false); });
+    music.addEventListener('ended', function () { syncMusicUI(false); });
   }
 
   if (btnOpen && cover) {
@@ -1273,7 +1464,7 @@
 
   if (musicToggle) {
     musicToggle.addEventListener('click', function () {
-      if (isPlaying) {
+      if (music && !music.paused) {
         pauseMusic();
       } else {
         playMusic();
